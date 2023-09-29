@@ -53,6 +53,8 @@ const Sheet = React.forwardRef<any, SheetProps>(
       disableDrag = false,
       prefersReducedMotion = false,
       tweenConfig = DEFAULT_TWEEN_CONFIG,
+      dragVelocityThreshold = DRAG_VELOCITY_THRESHOLD,
+      dragCloseThreshold = DRAG_CLOSE_THRESHOLD,
       ...rest
     },
     ref
@@ -124,7 +126,7 @@ const Sheet = React.forwardRef<any, SheetProps>(
     });
 
     const onDragEnd = useEvent((_, { velocity }: PanInfo) => {
-      if (velocity.y > DRAG_VELOCITY_THRESHOLD) {
+      if (velocity.y > dragVelocityThreshold) {
         // User flicked the sheet down
         onClose();
       } else {
@@ -146,7 +148,7 @@ const Sheet = React.forwardRef<any, SheetProps>(
 
           // Get the closest snap point
           snapTo = getClosest(snapToValues, currentY);
-        } else if (currentY / sheetHeight > DRAG_CLOSE_THRESHOLD) {
+        } else if (currentY / sheetHeight > dragCloseThreshold) {
           // Close if dragged over enough far
           snapTo = sheetHeight;
         }

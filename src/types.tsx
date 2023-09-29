@@ -38,6 +38,8 @@ export type SheetProps = {
   tweenConfig?: SheetTweenConfig;
   disableDrag?: boolean;
   prefersReducedMotion?: boolean;
+  dragVelocityThreshold?: number;
+  dragCloseThreshold?: number;
 } & SheetEvents &
   React.ComponentPropsWithoutRef<typeof motion.div>;
 
